@@ -1,19 +1,44 @@
 from selenium import webdriver
+import time
 
-chrome_driver_path = "C:\Users\pkabh\Downloads\ChromeSetup.exe"
+chrome_driver_path = "C:\Development\chromedriver.exe"
 
 class InternetSpeedBot:
 
-    def __str__(self):
+    def __init__(self):
         self.up = 0
         self.down = 0
+        self.driver = webdriver.Chrome(executable_path=chrome_driver_path)
 
     def get_internet_speed(self):
+        self.driver.get("https://www.speedtest.net/")
+        go_btn = self.driver.find_element_by_class_name("js-start-test")
+        go_btn.click()
+        time.sleep(60)
+        download_speed = self.driver.find_element_by_class_name("download-speed").text
+        upload_speed = self.driver.find_element_by_class_name("upload-speed").text
+        print(download_speed, upload_speed)
+        if download_speed and upload_speed:
+            self.tweet_at_internet_provider(download_speed, upload_speed)
+
         pass
 
-    def tweet_at_internet_provider(self):
-        pass
+    def tweet_at_internet_provider(self, down_speed=0, up_speed=0):
+        self.driver.get("https://twitter.com/i/flow/login")
+        time.sleep(5)
+        input_field = self.driver.find_element_by_name("text")
+        user_input = input("Please Enter username:")
+        input_field.send_keys(user_input)
+        next_btn = self.driver.find_element_by_xpath('//*[@id="layers"]/div/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[1]/div/div[6]')
+        next_btn.click()
+        pwd_feild = self.driver.find_element_by_name("password")
+        pwd = input("Please Enter Password:")
+        pwd_feild.send_keys(pwd)
 
-driver = webdriver.Chrome(executable_path=chrome_driver_path)
 
 
+
+
+bot = InternetSpeedBot()
+time.sleep(2)
+bot.tweet_at_internet_provider()
