@@ -1,0 +1,5 @@
+MINIMUM_DOWNLOAD_SPEED = 10
+MINIMUM_UPLOAD_SPEED = 10
+
+TWITTER_EMAIL="learning.python.test@gmail.com"
+TWITTER_EMAIL_PWD = ""
