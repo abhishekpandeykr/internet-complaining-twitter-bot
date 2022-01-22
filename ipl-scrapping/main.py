@@ -1,16 +1,15 @@
 import json
 
 from selenium import webdriver
-from time import sleep
 
 chrome_driver_path = "C:\Development\chromedriver.exe"
 
+user_input_teams_cnt = int(input("Please Enter total Teams which are in IPL Tournament ] \t"))
 driver = webdriver.Chrome(executable_path=chrome_driver_path)
-
 driver.get("https://www.iplt20.com/")
 
-# sleep(2)
-total_teams = 8
+
+total_teams = user_input_teams_cnt or 8
 teams = []
 for item in range(0, total_teams):
     team = {}
