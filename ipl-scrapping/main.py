@@ -19,11 +19,13 @@ for item in range(0, total_teams):
     played = score_container.find_element_by_css_selector(".pld .ap-team-name").text
     netrr = score_container.find_element_by_css_selector('.netrr .ap-team-name').text
     pts = score_container.find_element_by_css_selector('.pts .ap-team-name').text
+    form = score_container.find_element_by_css_selector('.formm .ap-wkt-wrp').text
     team['name'] = name
     team['played'] = played
     team['netrr'] = netrr
     team['pts'] = pts
     team['logo'] = logo
+    team['form'] = form.split(' ')
     teams.append(team)
 
 # write this data to json file
